@@ -18,6 +18,8 @@ const SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
 
 const AdminLogin = () => {
   // usestates of isDashboard, isAssessment, isTestReports to store boolen value
+  const [cursor, setCursor] = useState('default');
+  const [isOpen, setIsOpen] = useState(false);
   const [isDashboard, setIsDashboard] = useState(false);
   const [isAssessment, setIsAssessment] = useState(false);
   const [isTestReports, setIsTestReports] = useState(false);
@@ -143,6 +145,12 @@ const AdminLogin = () => {
     loadGoogleAPI();
   }, []);
 
+  let schoolNames=[]
+  for (let i of streamData){
+    schoolNames.push(i.School_Name)
+  }
+  schoolNames=[...new Set(schoolNames)]
+
   // fetchStreamTabulationData function used to calculate all streams scores of stream recommendation test and will be added to streamData responses
   const fetchStreamTabulationData = () => {
     // map method for streamData
@@ -188,55 +196,56 @@ const AdminLogin = () => {
       let science_bio_interests_score = 0;
       let science_math_aptitude_score = 0;
       let science_math_interests_score = 0;
+      
       // using map method for keys of object in stream Data to calculate scores
       Object.keys(item).map((score, i) => {
-        if (i > 2 && i < 90) {
+        if (i > 9 && i < 90) {
           // if index is in range of 10-90 then the below if condition executes
-          if (i - 2 in humanities_aptitude_responses) {
+          if (i - 9 in humanities_aptitude_responses) {
             // if index exists in humanities_aptitude_responses object then the below if condition executes
-            if (item[score] === humanities_aptitude_responses[i - 2]) {
+            if (item[score] === humanities_aptitude_responses[i - 9]) {
               // if the value that is stored in item equals to key that is in humanities_aptitude_responses object then the below if condition executes and caculates humanities_aptitude_score
               humanities_aptitude_score += 1;
             }
-          } else if (i - 2 in commerce_aptitude_reponses) {
+          } else if (i - 9 in commerce_aptitude_reponses) {
             // if index exists in commerce_aptitude_reponses object then the below if condition executes
-            if (item[score] === commerce_aptitude_reponses[i - 2]) {
+            if (item[score] === commerce_aptitude_reponses[i - 9]) {
               // if the value that is stored in item equals to key that is in commerce_aptitude_reponses object then the below if condition executes and caculates commerce_aptitude_score
               commerce_aptitude_score += 1;
             }
-          } else if (i - 2 in science_bio_aptitude_responses) {
+          } else if (i - 9 in science_bio_aptitude_responses) {
             // if index exists in science_bio_aptitude_responses object then the below if condition executes
-            if (item[score] === science_bio_aptitude_responses[i - 2]) {
+            if (item[score] === science_bio_aptitude_responses[i - 9]) {
               // if the value that is stored in item equals to key that is in science_bio_aptitude_responses object then the below if condition executes and caculates science_bio_aptitude_score
               science_bio_aptitude_score += 1;
             }
-          } else if (i - 2 in science_math_aptitude_responses) {
+          } else if (i - 9 in science_math_aptitude_responses) {
             // if index exists in science_math_aptitude_responses object then the below if condition executes
-            if (item[score] === science_math_aptitude_responses[i - 2]) {
+            if (item[score] === science_math_aptitude_responses[i - 9]) {
               // if the value that is stored in item equals to key that is in science_math_aptitude_responses object then the below if condition executes and caculates science_math_aptitude_score
               science_math_aptitude_score += 1;
             }
-          } else if (i - 2 in humanities_interests_responses) {
+          } else if (i - 9 in humanities_interests_responses) {
             // if index exists in humanities_interests_responses object then the below if condition executes
-            if (item[score] === humanities_interests_responses[i - 2]) {
+            if (item[score] === humanities_interests_responses[i - 9]) {
               // if the value that is stored in item equals to key that is in humanities_interests_responses object then the below if condition executes and caculates humanities_interests_score
               humanities_interests_score += 1;
             }
-          } else if (i - 2 in commerce_interests_responses) {
+          } else if (i - 9 in commerce_interests_responses) {
             // if index exists in commerce_interests_responses object then the below if condition executes
-            if (item[score] === commerce_interests_responses[i - 2]) {
+            if (item[score] === commerce_interests_responses[i - 9]) {
               // if the value that is stored in item equals to key that is in commerce_interests_responses object then the below if condition executes and caculates commerce_interests_score
               commerce_interests_score += 1;
             }
-          } else if (i - 2 in science_bio_interests_responses) {
+          } else if (i - 9 in science_bio_interests_responses) {
             // if index exists in science_bio_interests_responses object then the below if condition executes
-            if (item[score] === science_bio_interests_responses[i - 2]) {
+            if (item[score] === science_bio_interests_responses[i - 9]) {
               // if the value that is stored in item equals to key that is in science_bio_interests_responses object then the below if condition executes and caculates science_bio_interests_score
               science_bio_interests_score += 1;
             }
-          } else if (i - 2 in science_math_interests_responses) {
+          } else if (i - 9 in science_math_interests_responses) {
             // if index exists in science_math_interests_responses object then the below if condition executes
-            if (item[score] === science_math_interests_responses[i - 2]) {
+            if (item[score] === science_math_interests_responses[i - 9]) {
               // if the value that is stored in item equals to key that is in science_math_interests_responses object then the below if condition executes and caculates science_math_interests_score
               science_math_interests_score += 1;
             }
@@ -253,22 +262,26 @@ const AdminLogin = () => {
         commerce_interests_score +
         science_bio_interests_score +
         science_math_interests_score;
-      item.humanities_aptitude_score = humanities_aptitude_score;
-      item.humanities_interests_score = humanities_interests_score;
-      item.commerce_aptitude_score = commerce_aptitude_score;
-      item.commerce_interests_score = commerce_interests_score;
-      item.science_bio_aptitude_score = science_bio_aptitude_score;
-      item.science_bio_interests_score = science_bio_interests_score;
-      item.science_math_aptitude_score = science_math_aptitude_score;
-      item.science_math_interests_score = science_math_interests_score;
-      item.humanities_score =
-        humanities_aptitude_score + humanities_interests_score;
-      item.commerce_score = commerce_aptitude_score + commerce_interests_score;
-      item.science_bio_score =
-        science_bio_aptitude_score + science_bio_interests_score;
-      item.science_math_score =
-        science_math_aptitude_score + science_math_interests_score;
-      item.total_score = total_score;
+        item.humanities_aptitude_score = humanities_aptitude_score;
+        item.humanities_interests_score = humanities_interests_score;
+        item.commerce_aptitude_score = commerce_aptitude_score;
+        item.commerce_interests_score = commerce_interests_score;
+        item.science_bio_aptitude_score = science_bio_aptitude_score;
+        item.science_bio_interests_score = science_bio_interests_score;
+        item.science_math_aptitude_score = science_math_aptitude_score;
+        item.science_math_interests_score = science_math_interests_score;
+        item.humanities_score =
+          humanities_aptitude_score + humanities_interests_score;
+        item.commerce_score = commerce_aptitude_score + commerce_interests_score;
+        item.science_bio_score =
+          science_bio_aptitude_score + science_bio_interests_score;
+        item.science_math_score =
+          science_math_aptitude_score + science_math_interests_score;
+        item.total_score = total_score;
+        item.percentage =
+        ((total_score / process.env.REACT_APP_TOTAL_QUESTIONS) * 100).toFixed(
+          2
+        ) + "%";
     });
   };
 
@@ -318,10 +331,16 @@ const AdminLogin = () => {
     setIsAssessment(false);
     setIsTestReports(true);
   };
+  const changeCursor = () => {
+    setCursor(prevState => {
+      return 'default';
+    });
+  }
 
   return (
     <div>
-      <div className='admin-container'>
+      <div className='admin-container' onClick={changeCursor}
+    style={{ cursor: cursor }}>
         {isSignedIn ? (
           // if admin has signedIn, the below code will render
           <div className='admin-header-container'>
@@ -329,7 +348,7 @@ const AdminLogin = () => {
             <div className='admin-header-logo-container'>
               {/* logo and after clicking this logo, it'll navigates to home route*/}
               <img
-              src='https://res.cloudinary.com/de5cu0mab/image/upload/v1688971136/Logo_Final_uovjgi.png'
+              src='https://res.cloudinary.com/de5cu0mab/image/upload/v1689847926/Logo_ForDark-BG_gx0djs.png'
               alt='logo'
               className="logo"
               onClick={() => navigate("/")}
@@ -340,21 +359,21 @@ const AdminLogin = () => {
               {/* when clicking this Dashboard text, it'll navigates to dashboard route */}
               <p
                 onClick={() => handleDashboard()}
-                className='admin-desktop-header-navbar-link'
+                className={isDashboard ? 'dashboard' :'admin-desktop-header-navbar-link'}
               >
                 Dashboard
               </p>
               {/* when clicking this Assessments text, it'll navigates to send assessments route */}
               <p
                 onClick={() => handleAssessment()}
-                className='admin-desktop-header-navbar-link'
+                className={isAssessment ? 'dashboard' :'admin-desktop-header-navbar-link'}
               >
                 Assessments
               </p>
               {/* when clicking this Test Report text, it'll navigates to test report route */}
               <p
                 onClick={() => handleTestReports()}
-                className='admin-desktop-header-navbar-link'
+                className={isTestReports ? 'dashboard' :'admin-desktop-header-navbar-link'}
               >
                 Test Report
               </p>
@@ -369,6 +388,7 @@ const AdminLogin = () => {
             {/* nav header for mobile  with Logo and components Dashboard, Assessments, Test Report and Sign Out */}
             <div className='admin-mobile-header-navbar-container'>
               <Popup
+                
                 contentStyle={{
                   width: "70%",
                   backgroundColor: "white",
@@ -379,30 +399,38 @@ const AdminLogin = () => {
                   alignItems: "center",
                 }}
                 trigger={
-                  <button className='admin-hamburger-btn'>
-                    <GiHamburgerMenu />
+                  <button className='admin-hamburger-btn' >
+                    <GiHamburgerMenu onClick={()=>setIsOpen(true)} />
                   </button>
                 }
                 position='bottom right'
+                open={isOpen} 
+                onClose={()=>setIsOpen(false)}
               >
                 <ul className='admin-mobile-hamburger-menu'>
                   {/* when clicking this Dashboard text, it'll navigates to dashboard route */}
                   <li
-                    onClick={() => handleDashboard()}
+
+                    onClick={() => {handleDashboard()
+                      setIsOpen(false)
+                    }}
                     className='admin-header-navbar-link'
                   >
                     Dashboard
                   </li>
                   {/* when clicking this Assessments text, it'll navigates to send assessments route */}
                   <li
-                    onClick={() => handleAssessment()}
+                    onClick={() => {handleAssessment()
+                      setIsOpen(false)}}
                     className='admin-header-navbar-link'
                   >
                     Assessments
                   </li>
                   {/* when clicking this Test Report text, it'll navigates to test report route */}
                   <li
-                    onClick={() => handleTestReports()}
+                    onClick={() => {handleTestReports()
+                      setIsOpen(false)}}
+
                     className='admin-header-navbar-link'
                   >
                     Test Report
@@ -433,7 +461,7 @@ const AdminLogin = () => {
           </div>
         )}
         {/* if isDashboard is true then Dashboard component will render */}
-        {isDashboard && <Dashboard datat={streamData} />}
+        {isDashboard && <Dashboard datat={streamData} schoolNames={schoolNames} />}
         {/* if isAssessment is true then SendAssessments component will render */}
         {isAssessment && <SendAssessments datat={streamData} />}
         {/* if isTestReports is true then TestReport component will render */}

@@ -107,8 +107,31 @@ function TestReport(props) {
       sortable: false,
     },
     {
+      field: "School_Name",
+      headerName: "School Name",
+      width: 160,
+      headerClassName: "table-header",
+      cellClassName: "table-cell",
+      sortable: false,
+    },
+    {
+      field: "Board",
+      headerName: "Board",
+      width: 120,
+      headerClassName: "table-header",
+      cellClassName: "table-cell",
+      sortable: false,
+    },
+    {
       field: "Score",
       headerName: "Total Score",
+      width: 100,
+      headerClassName: "table-header",
+      cellClassName: "table-cell",
+    },
+    {
+      field: "percentage",
+      headerName: "Percentage",
       width: 100,
       headerClassName: "table-header",
       cellClassName: "table-cell",
@@ -245,13 +268,13 @@ function TestReport(props) {
       // if Total_Score column is not present in google sheet, the below code will execute
       // fetching an sheet db api to access the required data in google sheet
       fetch(
-        `https://sheetdb.io/api/v1/bhymdl2yiryk4/Email_Address/${item.Email_Address}`,
+        `https://sheetdb.io/api/v1/4c3fbfomg38uv/Email_Address/${item.Email_Address}`,
         {
           method: "PATCH",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: "Bearer q031lh4xf0lyhtpa9mk47wiyqyaitt6xowfd8zp3",
+            Authorization: "Bearer 00icuozoymtuvwdrtuhdsrx2y78g6tx4a7m5eptx",
           },
           // in body we need to add all the required data to update it in google sheet
           body: JSON.stringify({
@@ -349,7 +372,7 @@ function TestReport(props) {
             Filter
           </button>
         </div>
-
+        {endDate < startDate && endDate && <p className="error">*End Date Should Be Greater Than Start Date</p>}
         {/* desktop table container with table of stream recommendation test data respones */}
         <div className='d-none d-lg-block'>
           {filteredData.length > 0 ? (
@@ -380,47 +403,47 @@ function TestReport(props) {
                     <p className='td'>{item.id}</p>
                   </div>
                   <div className='table-data'>
-                    <p>Completed On</p>
+                    <p className='th'>Completed On</p>
                     <p className='td'>{item.Timestamp}</p>
                   </div>
                   <div className='table-data'>
-                    <p>Full Name</p>
+                    <p className='th'>Full Name</p>
                     <p className='td'>{item.Full_Name}</p>
                   </div>
                   <div className='table-data'>
-                    <p>Email Address</p>
+                    <p className='th'>Email Address</p>
                     <p className='td'>{item.Email_Address}</p>
                   </div>
                   <div className='table-data'>
-                    <p>Phone Number</p>
+                    <p className='th'>Phone Number</p>
                     <p className='td'>{item.Phone_Number}</p>
                   </div>
                   <div className='table-data'>
-                    <p>Parent's Email Id</p>
+                    <p className='th'>Parent's Email Id</p>
                     <p className='td'>{item.Parent_Email_Id}</p>
                   </div>
                   <div className='table-data'>
-                    <p>Parent's Phone Number</p>
+                    <p className='th'>Parent's Phone Number</p>
                     <p className='td'>{item.Parent_Phone_Number}</p>
                   </div>
                   <div className='table-data'>
-                    <p>Total Score</p>
+                    <p className='th'>Total Score</p>
                     <p className='td'>{item.Score}</p>
                   </div>
                   <div className='table-data'>
-                    <p>Humanities Score</p>
+                    <p className='th'>Humanities Score</p>
                     <p className='td'>{item.humanities_score}</p>
                   </div>
                   <div className='table-data'>
-                    <p>Commerce Score</p>
+                    <p className='th'>Commerce Score</p>
                     <p className='td'>{item.commerce_score}</p>
                   </div>
                   <div className='table-data'>
-                    <p>Science With Bio Score</p>
+                    <p className='th'>Science With Bio Score</p>
                     <p className='td'>{item.science_bio_score}</p>
                   </div>
                   <div className='table-data'>
-                    <p>Science With Math Score</p>
+                    <p className='th'>Science With Math Score</p>
                     <p className='td'>{item.science_math_score}</p>
                   </div>
                   {/* clicking view Score button it'll navigates to studentChart route */}

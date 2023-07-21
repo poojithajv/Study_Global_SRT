@@ -27,6 +27,7 @@ import {
 } from "recharts";
 
 function StudentBarChart() {
+  const [cursor, setCursor] = useState('default');
   // detailsPdf is a useref hook used to persist values between renders
   const detailsPdf = useRef();
   // location varaiable to get location of the testReports route and state
@@ -97,8 +98,7 @@ function StudentBarChart() {
   // generatePdf function used to generate the pdf which includes student details along with all streams aptitude and interest scores piechart when clicking on the download button in the component
   const generatePdf = useReactToPrint({
     content: () => detailsPdf.current,
-    documentTitle: data.Email_Address.slice(0, data.Email_Address.indexOf("@")),
-    onAfterPrint: () => alert("pdf downloaded"),
+    documentTitle: data.Full_Name+'_score_report',
   });
   // handle Submit function used to sent email to students regarding candidate details and scores through email
   const handleSubmit = (item) => {
@@ -136,15 +136,22 @@ function StudentBarChart() {
     const body = `Dear ${data.Full_Name},%0D%0A %0D%0A     Hope you are doing well. Your Strem Recommendation Test submission was successful. Here is your test score. We will share the detailed score report and discuss the stream that is best suited for you over a call. %0D%0A %0D%0AYour Stream Recommendation Test Scores: %0D%0A %0D%0A`; // email  body
     window.location.href = `mailto:${data.Email_Address}?cc=${data.Parent_Email_Id}&subject=${subject}&body=${body}`;
   };
+
+  const changeCursor = () => {
+    setCursor(prevState => {
+      return 'default';
+    });
+  }
   return (
-    <div>
+    <div onClick={changeCursor}
+    style={{ cursor: cursor }}>
       <div className='barchart-container'>
         {/* header for desktop  with Logo and components Dashboard, Assessments, Test Reports, Student Reports and Admin */}
         <div className='admin-header-container'>
           <div className='admin-header-logo-container'>
             {/* logo */}
             <img
-              src='https://res.cloudinary.com/de5cu0mab/image/upload/v1688971136/Logo_Final_uovjgi.png'
+              src='https://res.cloudinary.com/de5cu0mab/image/upload/v1689847926/Logo_ForDark-BG_gx0djs.png'
               alt='logo'
               className="logo"
               onClick={() => navigate("/")}
@@ -206,10 +213,10 @@ function StudentBarChart() {
           </div>
         </div>
         {/* table with low, medium and high interest of all streams aptitude and interest scores data */}
-        <div ref={detailsPdf}>
-          <div className='pdf-only'>
-            <PdfContent />
-          </div>
+        <div ref={detailsPdf} className="pdf-only">
+          <PdfContent streamsContent={streams} data={data} />
+        </div>
+          <div>
           <h1 className='rank-heading'>Stream Recommendation</h1>
           <div className='barchart-student-container'>
             <h1 className='student-details-heading'>Student Details</h1>
@@ -269,14 +276,14 @@ function StudentBarChart() {
                       <tr key={index}>
                         <td>{item[0]}</td>
                         <td>
-                          {item[1] > 0 && item[1] < 2
+                          {item[1] >= 0 && item[1] < 2
                             ? "Low"
                             : item[1] > 1 && item[1] < 4
                             ? "Medium"
                             : "High"}
                         </td>
                         <td>
-                          {item[2] > 0 && item[2] < 6
+                          {item[2] >= 0 && item[2] < 6
                             ? "Low"
                             : item[2] > 5 && item[2] < 11
                             ? "Medium"
@@ -334,6 +341,7 @@ function StudentBarChart() {
         </div>
         <div className='barchart-buttons-container'>
           {/* By clicking Download button, pdf with student data can be dowloaded */}
+          <div className="buttons-cont">
           <button
             type='button'
             style={{ backgroundColor: "#004461" }}
@@ -350,7 +358,9 @@ function StudentBarChart() {
           >
             Send Email
           </button>
+          </div>
           {/* By clicking the view score button, studentChart route will be navigated */}
+          <div className="buttons-cont">
           <button
             style={{ backgroundColor: "#ED2B2A" }}
             onClick={() => navigate("/studentChart", { state: data })}
@@ -367,6 +377,7 @@ function StudentBarChart() {
           >
             Send Manually
           </button>
+          </div>
         </div>
         {/* react-bootstrap modal for including cc */}
         <Modal show={isOpen} onRequestClose={handleClose}>
