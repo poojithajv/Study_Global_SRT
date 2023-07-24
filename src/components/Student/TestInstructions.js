@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
+import Logo from '../../Logo.png'
 import "./index.css";
 
 const TestInstructions = () => {
@@ -42,7 +43,7 @@ const TestInstructions = () => {
         {/* logo and after clicking this logo, it'll navigates to home route*/}
         <div className="logo-container">
           <img
-            src="https://res.cloudinary.com/dhbmdoldt/image/upload/v1689847916/Logo_ForDark-BG_tfgmpi.png"
+            src={Logo}
             alt="logo"
             className="logo1"
           />
@@ -58,7 +59,7 @@ const TestInstructions = () => {
         <div className="self-align">
           <p>
             <br />
-            <b>Email : jivanishahina@gmail.com</b>
+            <b>Email : overseaseducation1000@gmail.com</b>
             <br />
             <b>Phone : </b>9999999999
           </p>

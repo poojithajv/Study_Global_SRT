@@ -67,3 +67,8 @@
     height: 2px;
     background-color: #FFFFFF;
   }
+  @media screen and (max-width:600px){
+    .below-container{
+      font-size: 12px;
+    }
+  }

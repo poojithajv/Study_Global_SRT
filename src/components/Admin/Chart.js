@@ -13,6 +13,7 @@ import Footer from "../Footer/Footer";
 import { useReactToPrint } from "react-to-print";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import Logo from '../../Logo.png'
 import "./index.css";
 
 function Chart() {
@@ -114,7 +115,7 @@ function Chart() {
           <div className='admin-header-logo-container'>
             {/* logo */}
             <img
-              src='https://res.cloudinary.com/de5cu0mab/image/upload/v1689847926/Logo_ForDark-BG_gx0djs.png'
+              src={Logo}
               alt='logo'
               className="logo"
               onClick={() => navigate("/")}
@@ -124,14 +125,14 @@ function Chart() {
           <div className='admin-desktop-header-navbar-container'>
             {/* when clicking this Home text, it'll navigates to home route*/}
             <p
-              className='admin-desktop-header-navbar-link'
+              className='admin-desktop-header-navbar-li'
               onClick={() => navigate("/")}
             >
               Home
             </p>
             {/* when clicking this Admin text, it'll navigates to admin login route and again admin can access all routes */}
             <p
-              className='admin-desktop-header-navbar-link'
+              className='admin-desktop-header-navbar-li'
               onClick={() => navigate("/adminLogin")}
             >
               Admin

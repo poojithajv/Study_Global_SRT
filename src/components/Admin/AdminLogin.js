@@ -12,6 +12,7 @@ import TestReport from "./TestReport";
 import { gapi } from "gapi-script";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
+import Logo from '../../Logo.png'
 import "./AdminLogin.css";
 // scopes variable is a google api to get access of google spreadsheets
 const SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
@@ -348,7 +349,7 @@ const AdminLogin = () => {
             <div className='admin-header-logo-container'>
               {/* logo and after clicking this logo, it'll navigates to home route*/}
               <img
-              src='https://res.cloudinary.com/de5cu0mab/image/upload/v1689847926/Logo_ForDark-BG_gx0djs.png'
+              src={Logo}
               alt='logo'
               className="logo"
               onClick={() => navigate("/")}

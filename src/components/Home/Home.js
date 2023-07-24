@@ -6,7 +6,9 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
+import Logo from '../../Logo.png'
 import "./index.css";
+
 
 function Home() {
   const [cursor, setCursor] = useState('default');
@@ -26,27 +28,13 @@ function Home() {
           <div className='headerLogoContainer'>
             {/* logo and after clicking this logo, it'll navigates to home route*/}
             <img
-              src='https://res.cloudinary.com/de5cu0mab/image/upload/v1689847926/Logo_ForDark-BG_gx0djs.png'
+              src={Logo}
               alt='logo'
               className="logo"
             />
             <h6 className="test-heading">Stream Recommendation Test</h6>
           </div>
           <div className='desktopHeaderNavbarContainer'>
-            {/* when clicking this Home text, it'll navigates to home route */}
-            <p
-              onClick={() => navigate("/")}
-              className='headerDesktopNavbarLink'
-            >
-              Home
-            </p>
-            {/* when clicking this Student text, it'll navigates to student route */}
-            <p
-              onClick={() => navigate("/studentLogin")}
-              className='headerDesktopNavbarLink'
-            >
-              Student
-            </p>
             {/* when clicking this Admin text, it'll navigates to admin route */}
             <p
               onClick={() => navigate("/adminLogin")}
@@ -75,17 +63,6 @@ function Home() {
               position='bottom right'
             >
               <ul className='admin-mobile-hamburger-menu'>
-                {/* when clicking this Home text, it'll navigates to home route */}
-                <li onClick={() => navigate("/")} className='headerNavbarLink'>
-                  Home
-                </li>
-                {/* when clicking this Student text, it'll navigates to student route */}
-                <li
-                  onClick={() => navigate("/studentLogin")}
-                  className='headerNavbarLink'
-                >
-                  Student
-                </li>
                 {/* when clicking this Admin text, it'll navigates to admin route */}
                 <li
                   onClick={() => navigate("/adminLogin")}

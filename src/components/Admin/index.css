@@ -392,7 +392,7 @@ th {
   margin-right: 20px;
   transition: border-color 0.66s ease-out, font-size 0.3s ease-out;
 }
-.admin-desktop-header-navbar-link {
+.admin-desktop-header-navbar-li {
   color: white;
   font-weight: bold;
   font-size: 18px;
@@ -402,12 +402,12 @@ th {
   transition: border-color 0.66s ease-out, font-size 0.3s ease-out;
 }
 
-/* .admin-desktop-header-navbar-link:hover {
+.admin-desktop-header-navbar-li:hover {
   background-position: 100% 100%;
   transform: scale(1);
   transition: transform 1s;
   color: #ed2b2a;
-} */
+}
 
 .admin-mobile-header-navbar-container {
   display: none;
@@ -488,6 +488,7 @@ th {
   border-radius: 12px;
   width: 90%;
   margin: auto;
+  margin-left: 10px;
   margin-bottom: 10px;
 }
 .barchart-student-details-container {
@@ -524,6 +525,7 @@ th {
   .barchart-student-container {
     width: 80%;
     padding: 20px;
+    margin: auto;
   }
 }
 @media screen and (max-width: 600px) {

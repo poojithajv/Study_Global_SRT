@@ -5,12 +5,12 @@ const Footer = () => {
   return (
     <div className='main'>
       <div className='footer-main-container'>
-        <div className='social_media mt-2'>
+        {/* <div className='social_media mt-2'>
           <FaFacebook style={{ fontSize: "30px", color: "#FFFFFF" }} />
           <FaInstagram style={{ fontSize: "30px", color: "#FFFFFF" }} />
           <FaLinkedin style={{ fontSize: "30px", color: "#FFFFFF" }} />
           <FaTwitter style={{ fontSize: "30px", color: "#FFFFFF" }} />
-        </div>
+        </div> */}
       </div>
       <hr className='my-hr' />
       <div className='below-container'>

@@ -57,7 +57,7 @@ const PdfContent = ({ streamsContent, data }) => {
           </p>
         </div>
       </div>
-      <a target="_blank" href="https://www.overseaseducation.net">
+      <a target="_blank" href="http://www.overseaseducation.net">
         www.overseaseducation.net
       </a>
 

@@ -1,6 +1,7 @@
 // Test Component used to get the google form to take the test
 import React, { useState } from "react";
 import Footer from "../Footer/Footer";
+import Logo from '../../Logo.png'
 import "./index.css";
 
 const Test = () => {
@@ -20,7 +21,7 @@ const Test = () => {
         {/* logo and after clicking this logo, it'll navigates to home route*/}
         <div className="logo-container">
           <img
-            src="https://res.cloudinary.com/dhbmdoldt/image/upload/v1689847916/Logo_ForDark-BG_tfgmpi.png"
+            src={Logo}
             alt="logo"
             className="logo1"
           />
@@ -36,7 +37,7 @@ const Test = () => {
         <div className="self-align">
           <p>
             <br />
-            <b>Email : jivanishahina@gmail.com</b>
+            <b>Email : overseaseducation1000@gmail.com</b>
             <br />
             <b>Phone : </b>9999999999
           </p>
@@ -50,7 +51,7 @@ const Test = () => {
           Loading…
         </iframe>
       </div>
-      <div style={{width:'100%'}}>
+      <div style={{width:'100%',position:'absolute',bottom:'0px'}}>
       <Footer />
       </div>
     </div>
