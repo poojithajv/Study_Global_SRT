@@ -567,7 +567,28 @@ th {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 50px;
+  margin-left: -50px;
+}
+@media screen and (max-width:767px){
+  .barchart-table-container{
+    display: none;
+  }
+}
+.barchart-table1-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.barchart-table-mobile-container{
+  display: none;
+}
+@media screen and (max-width:767px) {
+  .barchart-table-mobile-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: -50px;
+  }
 }
 .barchart {
   margin-left: -100px;
