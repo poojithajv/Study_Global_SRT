@@ -64,7 +64,20 @@ const PdfContent = ({ streamsContent, data }) => {
 
       <hr style={{ height: "2px" }} />
       <div style={{ "page-break-after": "always" }}>
-        <h1 className="text-center pb-5">Stream Recommendation Test Report</h1>
+      <div className='barchart-student-container'>
+            <h1 className='student-details-heading'>Student Details</h1>
+            <div className='barchart-student-details-container'>
+              <div className='barchart-student-details'>
+                <p>Name : {data.Full_Name} </p>
+                <p>Test Completed On : {data.Timestamp}</p>
+              </div>
+              <div className='barchart-student-details'>
+                <p>Email Address : {data.Email_Address} </p>
+                <p>Phone Number : {data.Phone_Number}</p>
+              </div>
+            </div>
+          </div>
+        <h1 className="text-center">Stream Recommendation Test Report</h1>
         <p className="">
           Selecting a suitable career is the first step for a successful life
           ahead. Career selection can be quiet a challenging task as one is
@@ -88,7 +101,7 @@ const PdfContent = ({ streamsContent, data }) => {
         </p>
         <br />
 
-        <div>
+        {/* <div>
           <table border="2px">
             <thead>
               <tr>
@@ -119,13 +132,13 @@ const PdfContent = ({ streamsContent, data }) => {
               ))}
             </tbody>
           </table>
-        </div>
+        </div> */}
 
         <h5>
           <b>Student Stream Recommendation Rank:</b>
         </h5>
-        <div className='barchart-table-container'>
-            <BarChart width={450} height={300} data={data}
+        <div className='barchart-table1-container'>
+            {/* <BarChart width={450} height={300} data={data}
             margin={{
               top: 30,
               right: 0,
@@ -146,11 +159,11 @@ const PdfContent = ({ streamsContent, data }) => {
                   <Legend />
             <Bar dataKey="Aptitude" fill="#8884d8" barSize={30} />
             <Bar dataKey="Interest" fill="#82ca9d" barSize={30}/>
-          </BarChart>
+          </BarChart> */}
               {/* bar chart of all streams total scores of stream recommendation test */}
-              {/* <div className='barchart'>
+              <div className='barchart'>
                 <BarChart
-                  width={300}
+                  width={400}
                   height={300}
                   data={BarchartData}
                   margin={{
@@ -171,13 +184,13 @@ const PdfContent = ({ streamsContent, data }) => {
                     dataKey='name'
                     style={{ fontSize: "8px", fontWeight: "bold" }}
                   />
-                  <YAxis
+                  {/* <YAxis
                     type='number'
                     style={{ fontSize: "15px", fontWeight: "bold" }}
                     domain={[0, 20]}
-                  />
+                  /> */}
                 </BarChart>
-              </div> */}
+              </div>
             </div>
         <br />
         <p>
@@ -282,7 +295,8 @@ const PdfContent = ({ streamsContent, data }) => {
       <br />
       <br />
       <div style={{ "page-break-after": "always" }}>
-        <h2>Popular Courses after 12 th :</h2>
+        <h2>Popular Courses after 12
+          <sup>th</sup> :</h2>
         <br />
 
         <h4 className="text-center">

@@ -222,7 +222,7 @@ function StudentBarChart() {
         </div>
         {/* table with low, medium and high interest of all streams aptitude and interest scores data */}
         <div ref={detailsPdf} className="pdf-only">
-          <PdfContent streamsContent={streams} data={datab} />
+          <PdfContent streamsContent={streams} data={data} />
         </div>
           <div>
           <h1 className='rank-heading'>Stream Recommendation</h1>
@@ -307,7 +307,7 @@ function StudentBarChart() {
               All streams Total Score Bar Chart
             </h1>
             <div className='barchart-table-container'>
-            <BarChart width={450} height={300} data={datab}
+            {/* <BarChart width={450} height={300} data={datab}
             margin={{
               top: 30,
               right: 0,
@@ -328,11 +328,11 @@ function StudentBarChart() {
                   <Legend />
             <Bar dataKey="Aptitude" fill="#8884d8" barSize={30} />
             <Bar dataKey="Interest" fill="#82ca9d" barSize={30}/>
-          </BarChart>
+               </BarChart> */}
               {/* bar chart of all streams total scores of stream recommendation test */}
-              {/* <div className='barchart'>
+              <div className='barchart'>
                 <BarChart
-                  width={300}
+                  width={400}
                   height={300}
                   data={BarchartData}
                   margin={{
@@ -359,10 +359,10 @@ function StudentBarChart() {
                     domain={[0, 20]}
                   />
                 </BarChart>
-              </div> */}
+              </div> 
             </div>
-            <div className='barchart-table-mobile-container'>
-            <BarChart width={310} height={300} data={datab}
+            <div className='barchart-table-mobile-container'> 
+            {/* <BarChart width={310} height={300} data={datab}
             margin={{
               top: 30,
               right: 0,
@@ -383,9 +383,9 @@ function StudentBarChart() {
                   <Legend />
             <Bar dataKey="Aptitude" fill="#8884d8" barSize={20} />
             <Bar dataKey="Interest" fill="#82ca9d" barSize={20}/>
-          </BarChart>
-              {/* bar chart of all streams total scores of stream recommendation test */}
-              {/* <div className='barchart'>
+          </BarChart> */}
+              {/* bar chart of all streams total scores of stream recommendation test */} 
+              <div className='barchart'>
                 <BarChart
                   width={300}
                   height={300}
@@ -414,14 +414,8 @@ function StudentBarChart() {
                     domain={[0, 20]}
                   />
                 </BarChart>
-              </div> */}
-            </div>
-          </div>
-          <div>
-            <p className='copyright'>
-              @{new Date().getFullYear()} Study Global OverSeas Education
-              Consultants. All right reserved.
-            </p>
+              </div>
+             </div>
           </div>
         </div>
         <div className='barchart-buttons-container'>
